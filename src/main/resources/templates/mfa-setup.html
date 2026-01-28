@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Setup MFA</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+        }
+        .container {
+            border: 1px solid #ddd;
+            padding: 30px;
+            border-radius: 8px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+        h1 { color: #333; }
+        .qr-code {
+            margin: 20px 0;
+            padding: 20px;
+            background-color: white;
+            border-radius: 8px;
+        }
+        .secret {
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+            font-family: monospace;
+            word-break: break-all;
+        }
+        .instructions {
+            text-align: left;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+        button {
+            padding: 10px 30px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        button:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Setup Multi-Factor Authentication</h1>
+
+    <div class="instructions">
+        <h3>Follow these steps:</h3>
+        <ol>
+            <li>Install Google Authenticator or any TOTP app on your phone</li>
+            <li>Scan the QR code below with your authenticator app</li>
+            <li>Or manually enter the secret key</li>
+            <li>Return to the home page and log in again to test MFA</li>
+        </ol>
+    </div>
+
+    <div class="qr-code">
+        <img th:src="${qrCode}" alt="QR Code" style="max-width: 250px;"/>
+    </div>
+
+    <div class="secret">
+        <strong>Secret Key:</strong><br/>
+        <span th:text="${secret}">SECRET_KEY_HERE</span>
+    </div>
+
+    <p style="color: #666; font-size: 14px;">
+        Save this secret key in a secure place. You'll need it if you lose access to your authenticator app.
+    </p>
+
+    <a href="/home">
+        <button>Return to Home</button>
+    </a>
+</div>
+</body>
+</html>
